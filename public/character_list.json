@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Mario",
+    "image": "Mario.png",
+    "image_unselected": "Mario-unselected.png",
+    "audio": "Mario1.mp3"
+  },
+  {
+    "name": "Luigi",
+    "image": "Luigi.png",
+    "image_unselected": "Luigi-unselected.png",
+    "audio": "Luigi1.mp3"
+  },
+  {
+    "name": "Toad",
+    "image": "Toad.png",
+    "image_unselected": "Toad-unselected.png",
+    "audio": "Toad1.mp3"
+  },
+  {
+    "name": "Peach",
+    "image": "Peach.png",
+    "image_unselected": "Peach-unselected.png",
+    "audio": "Peach1.mp3"
+  },
+  {
+    "name": "Rosalina",
+    "image": "Rosalina.png",
+    "image_unselected": "Rosalina-unselected.png",
+    "audio": "Rosalina1.mp3"
+  }
+]

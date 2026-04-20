@@ -1,0 +1,448 @@
+@font-face {
+  font-family: "Mario";
+  src: url("/mariofont.ttf");
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: rgb(20, 26, 34);
+
+  font-family: "Raleway";
+}
+
+.loading {
+  display: flex;
+  background-size: 1cqmin;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.loading h1 {
+
+  background-color: red;
+  color: white;
+  padding: 2rem;
+  font-size: 4rem;
+}
+
+.screen {
+  position: relative;
+  background-color: white;
+  background-image: url("/dots4.png");
+  aspect-ratio: 16/9 !important;
+  width: min(100vw, calc(100vh * 16 / 9));
+  margin: 0 auto;
+  overflow: hidden;
+  background-size: 1cqmin;
+}
+
+.title {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 14%;
+  background-color: red;
+  mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50%/1.5cqw 100%;
+}
+
+.title h1 {
+  font-size: 4cqh;
+  font-weight: normal;
+  color: white;
+
+  align-self: center;
+  width: 100%;
+  text-align: center;
+}
+
+.player-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 80%;
+  height: 100%;
+  gap: .25cqmin;
+  margin: 0 auto;
+  margin-top: 1%;
+}
+
+.player-slot {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(233, 233, 233);
+
+}
+
+@keyframes slide-up {
+
+  from {
+    transform: translateY(+20%);
+  }
+
+  to {
+    transform: translateY(0);
+    ;
+  }
+
+}
+
+.player-slot::before {
+  content: "";
+  position: absolute;
+
+  left: 2%;
+  width: 10%;
+  height: 100%;
+  background-image: url("/stitch.png");
+  filter: brightness(1.5);
+  background-size: 15%;
+  background-repeat: repeat-y;
+  opacity: 0.8;
+}
+
+.player-slot::after {
+  content: "";
+  position: absolute;
+
+  right: 2%;
+  width: 10%;
+  height: 100%;
+  top: 0;
+  background-image: url("/stitch.png");
+  filter: brightness(1.5);
+  background-size: 15%;
+  background-position: right;
+  background-repeat: repeat-y;
+  opacity: 0.8;
+}
+
+.player-slot-controller {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  width: 35%;
+
+  margin: 0 auto;
+  margin-top: 11%;
+
+  gap: .5cqw;
+}
+
+.controller-dot {
+  display: flex;
+  aspect-ratio: 1/1;
+  width: 100%;
+  background: linear-gradient(0deg, rgb(80, 80, 80) 0%, black 100%);
+  align-items: center;
+  justify-content: center;
+}
+
+.controller-dot-number {
+  width: 70%;
+  height: 70%;
+
+
+
+  background-color: greenyellow;
+}
+
+.player-slot-image {
+  width: 100%;
+  aspect-ratio: 1/1;
+  height: auto;
+  margin-top: 15%;
+}
+
+.red {
+  color: rgb(255, 80, 57);
+  animation: color-animation 0.10s linear forwards;
+}
+
+.green {
+  color: rgb(90, 170, 0);
+  animation: color-animation 0.10s linear forwards;
+}
+
+.pink {
+  color: rgb(255, 183, 195);
+  animation: color-animation 0.10s linear forwards;
+
+}
+
+.blue {
+  color: rgb(0, 107, 255);
+  animation: color-animation 0.10s linear forwards;
+}
+
+.cyan {
+  color: rgb(96, 230, 230);
+  animation: color-animation 0.10s linear forwards;
+}
+
+.red-font {
+  color: red;
+}
+
+.green-font {
+  color: green;
+}
+
+.pink-font {
+  color: rgb(255, 107, 131)
+}
+
+.blue-font {
+  color: rgb(0, 86, 206);
+}
+
+.cyan-font {
+  color: rgb(0, 185, 185)
+}
+
+
+@keyframes color-animation {
+  0% {
+    background-color: rgb(255, 255, 130);
+  }
+
+  to {
+    background-color: currentColor;
+  }
+}
+
+
+.selected {
+
+  animation: selected-animation 0.10s linear;
+}
+
+@keyframes selected-animation {
+
+  from {
+    filter: sepia(1) saturate(10) hue-rotate(10deg);
+    scale: 1.25;
+  }
+
+  to {
+    filter: none;
+    scale: 1;
+  }
+
+
+}
+
+.character-name-container {
+  position: relative;
+}
+
+.character-name {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  font-size: 2.5cqw;
+  font-family: "Mario";
+  -webkit-text-stroke-width: .5cqw;
+  -webkit-text-stroke-color: white;
+  paint-order: stroke fill;
+
+
+
+}
+
+.character-name-container button {
+  position: absolute;
+  cursor: pointer;
+
+  margin: 0;
+
+  top: 50%;
+  bottom: 50%;
+  transform: translateY(-50%);
+  height: 100%;
+  width: auto;
+  border: none;
+  background-color: transparent;
+  z-index: 1;
+
+}
+
+.character-name-container button img {
+  position: absolute;
+  left: 0;
+  top: 10%;
+
+  width: auto;
+  height: 70%;
+  margin: 0;
+  animation: arrow-move 0.5s linear infinite;
+  z-index: -1;
+}
+
+@keyframes arrow-move {
+
+  0% {
+    transform: translateX(15%);
+  }
+
+  50% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(15%);
+  }
+
+}
+
+
+.character-name-container button:nth-of-type(1) {
+  left: 5%;
+
+}
+
+.character-name-container button:nth-of-type(2) {
+  right: 10%;
+}
+
+.character-name-container button:nth-of-type(2) img {
+  rotate: 180deg;
+}
+
+.select-indicator-container {
+  display: flex;
+  background-color: white;
+  border-radius: 50px;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20%;
+  justify-content: center;
+}
+
+.select-indicator {
+  color: red;
+  margin: 5% 5%;
+  font-size: 1.25cqw;
+  font-weight: normal;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.select-indicator-button {
+  color: white;
+  margin: 5% 0;
+  font-size: 1.25cqw;
+  font-weight: normal;
+  padding: 0 .25cqw;
+  font-weight: bold;
+
+  background-color: red;
+  border-radius: 50%;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.navigation-bar {
+  position: absolute;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  bottom: 0;
+  height: 8.5%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  isolation: isolate;
+  /* important */
+}
+
+
+.navigation-bar p:nth-child(1) {
+  margin-right: 1%;
+  font-size: 1.25cqw;
+  color: gray;
+  background-color: white;
+  border-radius: 50%;
+  padding: 0 .3cqw;
+
+
+
+}
+
+.navigation-bar p:nth-child(2) {
+  margin-right: 5%;
+  font-size: 1.25cqw;
+  color: white;
+  font-weight: bold;
+}
+
+
+@property --a {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+
+@property --b {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100.1%;
+}
+
+.finish-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 5;
+
+
+  mask: radial-gradient(circle at 50% 50%, transparent var(--a), black var(--b));
+
+
+
+
+}
+
+.iris-out {
+  animation: iris-out-animation 1.5s linear forwards;
+
+}
+
+.iris-in {
+  animation: iris-in-animation 1s linear forwards;
+}
+
+@keyframes iris-out-animation {
+
+  to {
+    --a: 0%;
+    --b: 0%;
+  }
+
+}
+
+@keyframes iris-in-animation {
+
+  from {
+    --a: 0%;
+    --b: 0%;
+  }
+
+  to {
+    --a: 100%;
+    --b: 100.1%;
+  }
+
+}
