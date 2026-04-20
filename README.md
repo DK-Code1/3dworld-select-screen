@@ -1,18 +1,17 @@
-# React + Vite
+# 3dworld-select-screen
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Super Mario 3D World character selection screen recreated in a browser, using React.
 
-Currently, two official plugins are available:
+<p align="center">
+  <a href="https://dk-code1.github.io/3dworld-select-screen/">
+    <img src="https://img.shields.io/badge/VISIT%20ON%20PAGES-blue?style=for-the-badge&logo=github">
+  </a>
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+# WIP
 
-## React Compiler
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+# DISCLAIMER
 
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This project is not a playable game nor is intended to be a replacement of the original game, its only purpose is to showcase layout creation in HTML and CSS.
+All original assets and characters belong to Nintendo and their respective owners.
