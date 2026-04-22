@@ -5,9 +5,12 @@ export const CharactersContext = createContext(null)
 export function CharactersContextProvider({children}){
 
     const [characters, setCharacters] = useState(null)
-    const [selectedCharacters, setSelectedCharacters] = useState([0,1,2,3]) // Character on slot
-    const [isSelected, setIsSelected] = useState([null,null,null,null]) // Slot selected a character, 0 false, 1 true
-    //first value is null, so it doesn't trigger the selected animation on start
+    const [selectedCharacters, setSelectedCharacters] = useState( // Slot characters status, 4 slots, selected character number and "done" if selected.
+        [{"selected": 0, "done": null},
+        {"selected": 1, "done": null},
+        {"selected": 2, "done": null},
+        {"selected": 3, "done": null}] ) 
+    //first done value is null, so it doesn't trigger the selected animation on start
 
 
     useEffect(() => { // Fetch data first
@@ -23,7 +26,7 @@ export function CharactersContextProvider({children}){
     }, [])
 
     return(
-        <CharactersContext.Provider value={{characters, setCharacters, selectedCharacters, setSelectedCharacters, isSelected, setIsSelected}}>
+        <CharactersContext.Provider value={{characters, setCharacters, selectedCharacters, setSelectedCharacters}}>
             {children}
         </CharactersContext.Provider>
     )

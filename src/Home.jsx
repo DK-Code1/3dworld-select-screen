@@ -3,17 +3,18 @@ import { PlayerSlot } from "./components/PlayerSlot";
 import { CharactersContext } from "./context/CharactersContext";
 import { useAudio } from "./hooks/useAudio";
 import { IrisEffect } from "./components/IrisEffect";
+import { Loading } from "./components/Loading";
 
 export function Home(){
 
 
-    const {characters, isSelected} = useContext(CharactersContext)
+    const {characters, selectedCharacters} = useContext(CharactersContext)
     const [isFinished, setIsFinished] = useState(false)
 
     const play_audio = useAudio(100)
 
     useEffect(()=>{ // If all slots stay selected it will play an audio
-        if (!isSelected.every((entry) => entry > 0)){
+        if (!selectedCharacters.every((entry) => entry.done)){
             return
         }
             
@@ -26,15 +27,15 @@ export function Home(){
         return ()=>{ //cancel the timer
             clearTimeout(timer)
         }
-    },[isSelected])
+    },[selectedCharacters])
 
 
     if(!characters){
         return(
 
-            <div className="loading">
-                <h1>Loading...</h1>
-            </div>
+            <Loading>
+                
+            </Loading>
         )
     }
 
