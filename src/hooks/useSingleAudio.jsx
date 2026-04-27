@@ -1,6 +1,6 @@
-import { useRef } from "react"
+import { useCallback, useRef } from "react"
 
-export function useSingleAudio(max_intervale=100) {
+export function useSingleAudio(max_interval=100) {
 
 
     const last_play = useRef(Date.now()) // Timer for audio
@@ -16,7 +16,7 @@ export function useSingleAudio(max_intervale=100) {
 
     }
 
-    function play_audio_timer(audio_path) {
+    const play_audio_timer = useCallback((audio_path)=> {
 
         if (!audio_path){
             return
@@ -26,12 +26,12 @@ export function useSingleAudio(max_intervale=100) {
 
         let current_time = Date.now()
 
-        if (current_time - last_timer > max_intervale) {
+        if (current_time - last_timer > max_interval) {
             last_play.current = current_time
             play_audio(audio_path)
         }
 
-    }
+    },[max_interval])
 
     return play_audio_timer
 }

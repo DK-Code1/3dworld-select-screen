@@ -43,6 +43,36 @@ body {
   background-size: 1cqmin;
 }
 
+.randomize-container{
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  height: 10%;
+  color: cyan;
+  z-index: 1;
+}
+
+.randomize-button{
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border: solid .35cqh black;
+  border-right: none;
+  border-top: none;
+  background-color: rgb(255, 70, 70);
+}
+
+.randomize-button:hover{
+  border-color: orange;
+}
+
+.randomize-button img{
+  width: 100%;
+  height: 100%;
+}
+
+
 .title {
   display: flex;
   position: relative;

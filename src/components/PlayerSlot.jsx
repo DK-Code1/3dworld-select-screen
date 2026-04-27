@@ -3,33 +3,32 @@ import { CharactersContext } from "../context/CharactersContext"
 import { useAudio } from "../hooks/useAudio"
 import { useSingleAudio } from "../hooks/useSingleAudio"
 
+
+const characters_colors = { // Color corresponds to character position in array
+    0: "red",
+    1: "green",
+    2: "blue",
+    3: "pink",
+    4: "cyan"
+}
+
 export function PlayerSlot({ player_number }) {
 
-    const { characters, selectedCharacters, setSelectedCharacters} = useContext(CharactersContext)
+    const { characters, selectedCharacters, setSelectedCharacters } = useContext(CharactersContext)
 
-    const [currentCharacter, setCurrentCharacter] = useState(characters[selectedCharacters[player_number].selected])
+    const currentCharacter = characters[selectedCharacters[player_number].selected]
 
     const main_div = useRef(null)
 
     const play_audio = useAudio(50)
     const play_voice = useSingleAudio(0)
 
-    useEffect(() => {
-        // if (!characters) {
-        //     return
-        // }
-        
-        setCurrentCharacter(characters[selectedCharacters[player_number].selected])
 
-
-    }, [selectedCharacters])
 
     useEffect(() => {
         if (selectedCharacters[player_number].done == null) { // if selected is null we do nothing to avoid triggering animations
             return
         }
-
-        
 
         if (selectedCharacters[player_number].done) {
             // Set character color
@@ -46,28 +45,19 @@ export function PlayerSlot({ player_number }) {
         }
     }, [selectedCharacters[player_number].done])
 
-    useEffect(()=>{
-        check_repeated()
-    }, selectedCharacters)
-
-    const characters_colors = { // Color corresponds to character position in array
-        0: "red",
-        1: "green",
-        2: "blue",
-        3: "pink",
-        4: "cyan"
-    }
-
-    function check_repeated(){
-        // for (var [index, entry ] of selectedCharacters.entries()) {
-  
-        // }
-
-        if (selectedCharacters.some((item, index)=> index != player_number && item.done && item.selected == selectedCharacters[player_number].selected )){
-            console.log("IT ALREADY SELECTED, my slot is: ", player_number)
+    function check_repeated() {
+        if (selectedCharacters.some((item, index) => index != player_number && item.done && item.selected == selectedCharacters[player_number].selected)) {
             change_character("next")
         }
     }
+
+    useEffect(() => {
+        check_repeated()
+    }, [selectedCharacters])
+
+
+
+
 
     function change_character(direction) { // Change character in a direction
         let current_character = selectedCharacters[player_number].selected
@@ -80,11 +70,11 @@ export function PlayerSlot({ player_number }) {
         // we check if the character is already selected or not
         // if selected the loop will toggle between values until a character is not selected yet.
 
-        while(selectedCharacters.some((item)=>  item.selected == new_character && item.done)){ 
+        while (selectedCharacters.some((item) => item.selected == new_character && item.done)) {
             new_character = (new_character + step + number_of_characters) % number_of_characters
         }
 
-        setSelectedCharacters(prev=> prev.map((item,index) => index == player_number ? {...item, "selected": new_character} : item))
+        setSelectedCharacters(prev => prev.map((item, index) => index == player_number ? { ...item, "selected": new_character } : item))
 
         play_audio(`audios/toggle.mp3`)
 
@@ -92,17 +82,7 @@ export function PlayerSlot({ player_number }) {
 
     function toggle_select_character() { // Toggle character selection
 
-        // for (var [index, entry ] of selectedCharacters.entries()) {
-        //     if (index != player_number){ // We process other slots
-                
-        //         if (entry.done && entry.selected == selectedCharacters[player_number].selected ){
-        //             return;
-        //         }
-        //     }
-            
-        // }
-
-        setSelectedCharacters(prev=> prev.map((entry, index) => index == player_number ? {...entry, done: !entry.done} : entry ))
+        setSelectedCharacters(prev => prev.map((entry, index) => index == player_number ? { ...entry, done: !entry.done } : entry))
     }
 
 
@@ -125,11 +105,11 @@ export function PlayerSlot({ player_number }) {
                 </div>
 
 
-                <img className={`player-slot-image ${selectedCharacters[player_number].done ? "selected" : ""}`} onClick={toggle_select_character} 
-                src={`${import.meta.env.VITE_ASSETS_SOURCE}icons/${!selectedCharacters[player_number].done ? currentCharacter.image_unselected : currentCharacter.image}`}></img>
+                <img className={`player-slot-image ${selectedCharacters[player_number].done ? "selected" : ""}`} onClick={toggle_select_character}
+                    src={`${import.meta.env.VITE_ASSETS_SOURCE}icons/${!selectedCharacters[player_number].done ? currentCharacter.image_unselected : currentCharacter.image}`}></img>
 
                 <div className="character-name-container">
-                    <p className={`character-name ${characters_colors[selectedCharacters[[player_number]]]}-font`}>{currentCharacter.name}</p>
+                    <p className={`character-name ${characters_colors[selectedCharacters[player_number].selected]}-font`}>{currentCharacter.name}</p>
 
                     {!selectedCharacters[player_number].done &&
                         <>
