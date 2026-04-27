@@ -1,8 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef} from "react"
 
 export function useBGM() {
-
-    const [isPlaying, setIsPlaying] = useState(false)
 
     const audio = useRef(new Audio())
 
@@ -23,13 +21,14 @@ export function useBGM() {
 
     const start_playback = useCallback(() => {
 
+        if (!audio.current.paused) {
+            return
+        }
         audio.current.src = `${import.meta.env.VITE_ASSETS_SOURCE}bgm/maintitle.opus`
         audio.current.autoplay = false
         audio.current.volume = 0.25
 
-        audio.current.play().then(() => {
-            setIsPlaying(true)
-        }).catch(() => {
+        audio.current.play().catch(() => {
             console.log("Cannot play audio yet.")
         })
 
@@ -39,7 +38,7 @@ export function useBGM() {
     }, [])
 
     function try_play() {
-        if (!isPlaying) {
+        if (audio.current.paused) {
             start_playback()
         }
     }
@@ -47,6 +46,7 @@ export function useBGM() {
     try_play()
 
     useEffect(() => {
-        document.addEventListener("pointerdown", try_play, { once: true })
+        document.addEventListener("pointerup", try_play, { once: true })
     }, [])
+
 }
